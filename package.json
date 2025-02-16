@@ -6,6 +6,11 @@
   "author": "Andy Truong",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client": "cd app/frontend && npm run dev",
+    "server": "cd app/backend && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2"
   }
 }
