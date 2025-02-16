@@ -1,0 +1,16 @@
+[
+  {
+    "email": "snoopy@wpi.edu",
+    "password": "peanuts",
+    "phonebook": [
+      { "index": 1, "firstName": "Helena", "lastName":"Young", "major": "Mechanical Engineering", "phoneNumber": "251-263-0796", "note": "Solves problems no one cares about" }
+    ]
+  },
+  {
+    "email": "mario@wpi.edu",
+    "password": "nintendo",
+    "phonebook": [
+      { "index": 1, "firstName": "Mia", "lastName": "Fratassio", "major": "Computer Science", "phoneNumber": "781-937-4192", "note": "Coding their way to unemployment" }
+    ]
+  }
+]
