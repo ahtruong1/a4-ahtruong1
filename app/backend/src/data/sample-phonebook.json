@@ -1,16 +1,18 @@
 [
   {
-    "email": "snoopy@wpi.edu",
-    "password": "peanuts",
+    "email": "gompei@wpi.edu",
+    "password": "mascot",
     "phonebook": [
-      { "index": 1, "firstName": "Helena", "lastName":"Young", "major": "Mechanical Engineering", "phoneNumber": "251-263-0796", "note": "Solves problems no one cares about" }
+      { "studentID": "252935546", "fullName": "Andy Truong", "major": "Computer Science", "phoneNumber": "774-239-1231", "description": "Coding their way to unemployment" },
+      { "studentID": "905723902", "fullName": "Helena Young", "major": "Mechanical Engineering", "phoneNumber": "251-263-0796", "description": "Solves problems no one cares about" }
     ]
   },
   {
-    "email": "mario@wpi.edu",
-    "password": "nintendo",
+    "email": "gwang@wpi.edu",
+    "password": "president",
     "phonebook": [
-      { "index": 1, "firstName": "Mia", "lastName": "Fratassio", "major": "Computer Science", "phoneNumber": "781-937-4192", "note": "Coding their way to unemployment" }
+      { "studentID": "321032852", "fullName": "Mia Fratassio", "major": "Computer Science", "phoneNumber": "781-937-4192", "description": "Coding their way to unemployment" },
+      { "studentID": "232323215", "fullName": "Allen Cheung", "major": "Data Science", "phoneNumber": "123-321-3213", "description": "Knows Python better than English" }
     ]
   }
 ]

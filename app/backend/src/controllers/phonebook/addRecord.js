@@ -1,6 +1,6 @@
 const client = require("../../config/database");
 const config = require("../../config/config");
-const insultDictionary = require("../../data/insultDictionary");
+const descriptionDictionary = require("../../data/descriptionDictionary");
 
 async function addRecord(req, res) {
     // Get record from request & add derived fields
@@ -32,7 +32,7 @@ async function addFields(record, userID) {
 
     // Add fields
     record.index = greatestIndex + 1;
-    record.note = insultDictionary.get(record["major"]);
+    record.note = descriptionDictionary.get(record["major"]);
     return record;
 }
 

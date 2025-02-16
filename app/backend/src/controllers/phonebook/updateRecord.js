@@ -1,6 +1,6 @@
 const client = require("../../config/database");
 const config = require("../../config/config");
-const insultDictionary = require("../../data/insultDictionary");
+const insultDictionary = require("../../data/descriptionDictionary");
 
 // Updates a record from the phonebook
 async function updateRecord(req, res) {
