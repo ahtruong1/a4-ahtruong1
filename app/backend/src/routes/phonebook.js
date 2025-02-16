@@ -9,6 +9,6 @@ router.use(verifyUser);
 router.post("/phonebook", phonebookAPI.addRecord);
 router.get("/phonebook", phonebookAPI.getRecords);
 router.put("/phonebook", phonebookAPI.updateRecord)
-router.delete("/phonebook/:index", phonebookAPI.deleteRecord);
+router.delete("/phonebook/:id", phonebookAPI.deleteRecord);
 
 module.exports = router;

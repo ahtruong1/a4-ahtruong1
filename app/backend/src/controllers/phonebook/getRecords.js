@@ -1,7 +1,7 @@
 const client  = require("../../config/database.js");
 const fs = require("fs");
 
-// Gets the webpage that displays all phonebook records
+// Gets all phonebook records
 async function getRecords(req, res) {
     // Get phonebook records from user
     const phonebook = req.user.phonebook;

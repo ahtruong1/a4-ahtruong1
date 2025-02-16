@@ -2,9 +2,10 @@ const client = require("../../config/database");
 const config = require("../../config/config");
 const descriptionDictionary = require("../../data/descriptionDictionary");
 
+// Adds a record to the phonebook
 async function addRecord(req, res) {
-    // Get record from request & add derived fields
-    const record = await addFields(req.body, req.user._id);
+    // Add description field
+    const record = addDescription(req.body);
 
     try {
         // Add record to database
@@ -17,22 +18,9 @@ async function addRecord(req, res) {
     }
 }
 
-// Adds an index and note to a record
-async function addFields(record, userID) {
-    const phonebook = client.db(config.DB_NAME).collection(config.COLLECTION_NAME);
-
-    // Determine greatest index
-    const greatestIndex = (
-        await phonebook
-            .aggregate([
-                { $unwind: "$phonebook" },
-                { $sort: { "phonebook.index": -1 } },
-                { $limit: 1 }
-            ]).toArray())[0].phonebook.index;
-
-    // Add fields
-    record.index = greatestIndex + 1;
-    record.note = descriptionDictionary.get(record["major"]);
+// Adds a description to a new record
+function addDescription(record) {
+    record.description = descriptionDictionary.get(record["major"]);
     return record;
 }
 

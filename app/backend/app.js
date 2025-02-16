@@ -8,7 +8,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(session({
-   secret: "cs4241-a3",
+   secret: "cs4241-a4",
    resave: false,
    saveUninitialized: false
 }));
