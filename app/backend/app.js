@@ -14,13 +14,10 @@ app.use(session({
 }));
 
 app.use(passport.authenticate('session'));
-app.use(express.static("public"));
 app.use(express.json());
 
 app.use(routers.authentication);
 app.use(routers.phonebook);
-
-app.use(express.static("public"));
 
 app.listen(PORT, () => {
    console.log(`Server is running at http://localhost:${PORT}`);
