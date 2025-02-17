@@ -4,7 +4,7 @@ const passport = require("../config/passport");
 
 const router = express.Router();
 
-router.post("/login", passport.authenticate("local"),
+router.post("/auth/login", passport.authenticate("local"),
     (req, res) => {
     res.status(200).send("OK");
 });

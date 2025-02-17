@@ -1,23 +1,27 @@
 import Button from "./Button.jsx";
 
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 export default function Phonebook() {
-    const [records, setRecords] = useState([{
-        id: 252935546,
-        fullName: "Andy Truong",
-        phoneNumber: "774-578-8319",
-        major: "Computer Science",
-        description: "Coding their way to unemployment"
-    }, {
-        id: 252935546,
-        fullName: "Helena Young",
-        phoneNumber: "133-323-2323",
-        major: "Mechanical Engineering",
-        description: "Mechanic without the hands on work"
-    }]);
+    const [records, setRecords] = useState([]);
+
+    useEffect(() => {
+        // Get phonebook records
+        async function fetchRecords() {
+            try {
+                const response = await axios.get("http://localhost:3000/api/phonebook", {
+                    withCredentials: true
+                });
+                return response.data;
+            } catch (e) {
+                alert("Failed to load phonebook. Refresh the page to try again!");
+            }
+        }
+        fetchRecords().then((data) => setRecords(data));
+    }, []);
 
     return (
         <>
@@ -34,12 +38,12 @@ export default function Phonebook() {
                 </thead>
                 <tbody>
                 {records.map((record) =>
-                    <tr className="border" key={record.id}>
-                        <td className="p-2">{record.id}</td>
-                        <td className="p-2">{record.fullName}</td>
-                        <td className="p-2">{record.phoneNumber}</td>
+                    <tr className="border" key={record.studentID}>
+                        <td className="p-2">{record.studentID}</td>
+                        <td className="p-2 text-nowrap">{record.fullName}</td>
+                        <td className="p-2 text-nowrap">{record.phoneNumber}</td>
                         <td className="p-2">{record.major}</td>
-                        <td className="p-2">{record.description}</td>
+                        <td className="p-2 text-pretty">{record.description}</td>
                         <td className="text-center">
                             <div className="inline mx-1">
                                 <Button type="button" variant="icon">

@@ -1,15 +1,35 @@
 import LoginForm from './components/LoginForm.jsx';
 import Phonebook from './components/Phonebook.jsx';
 
+import axios from "axios";
 import { useState } from "react";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // Logs the user in if the credentials are valid
-    function login(e) {
+    async function login(e) {
         e.preventDefault();
-        setIsLoggedIn(true);
+
+        // Retrieve form data
+        const formData = new FormData(e.target);
+
+        // Convert FormData --> JS object
+        const body = Object.fromEntries(formData.entries());
+
+        try {
+            // Make HTTP request to server
+            const response = await axios.post("http://localhost:3000/auth/login", body, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true
+            });
+            setIsLoggedIn(true);
+        } catch (e) {
+            alert("Incorrect username or password. Please try again!");
+        }
+
     }
 
     return (

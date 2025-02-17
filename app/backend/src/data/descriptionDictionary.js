@@ -10,6 +10,6 @@ descriptionDictionary.set("Chemical Engineering", "Will regret their decision in
 descriptionDictionary.set("Electrical & Computer Engineering", "Electricians");
 descriptionDictionary.set("Civil Engineering", "Future construction site worker");
 descriptionDictionary.set("Environmental Engineering", "Majoring in saving the world without building anything");
-descriptionDictionary.set("Business", "Act like they'll be billionaires, but cannot pass Calculus III");
+descriptionDictionary.set("Business", "Act like they'll be billionaires");
 
 module.exports = descriptionDictionary;

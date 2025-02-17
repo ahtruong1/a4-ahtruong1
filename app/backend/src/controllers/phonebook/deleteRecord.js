@@ -1,3 +1,5 @@
+const { ObjectId } = require("mongodb");
+
 const client  = require("../../config/database.js");
 const config = require("../../config/config");
 
@@ -9,7 +11,7 @@ async function deleteRecord(req, res) {
     try {
         // Delete the record from user's phonebook
         const result = await client.db(config.DB_NAME).collection(config.COLLECTION_NAME).updateOne(
-            { _id: req.user._id }, // Match user
+            { _id: new ObjectId(req.user._id) }, // Match user
             { $pull: { phonebook: { studentID: studentID } } }  // Match record
         );
         if (result.modifiedCount) res.status(200).send("OK");
