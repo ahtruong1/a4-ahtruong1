@@ -7,6 +7,9 @@ async function updateRecord(req, res) {
     // Get updated record from request
     const record = req.body;
 
+    // Update record's description field
+    record.description = descriptionDictionary.get(record.major);
+
     try {
         // Update matching record from database
         const result = await client.db(config.DB_NAME).collection(config.COLLECTION_NAME).updateOne({
@@ -17,10 +20,10 @@ async function updateRecord(req, res) {
                     "phonebook.$.fullName": record.fullName,
                     "phonebook.$.phoneNumber": record.phoneNumber,
                     "phonebook.$.major": record.major,
-                    "phonebook.$.description": descriptionDictionary.get(record.major)
+                    "phonebook.$.description": record.description
                 }
         });
-        if (result.modifiedCount) res.status(200).send("OK");
+        if (result.modifiedCount || result.matchedCount) res.status(200).json(record);
         else res.status(404).send("Record not found");
     } catch (err) {
         res.status(500).send("Error updating record");

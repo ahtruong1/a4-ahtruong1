@@ -1,4 +1,4 @@
-export default function Input({type, name, label, form}) {
+export default function FormInput({type, name, label, form}) {
     return (
         <>
             <label htmlFor={name}>{label}</label>
