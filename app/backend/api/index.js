@@ -3,7 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
 
-const routers = require("./src/routes/routers");
+const routers = require("../src/routes/routers");
 
 const app = express();
 const PORT = 3000;
