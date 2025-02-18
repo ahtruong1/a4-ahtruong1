@@ -24,7 +24,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/app/frontend/index.html"
+      "dest": "/app/frontend/dist"
     }
   ]
 }
