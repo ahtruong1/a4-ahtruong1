@@ -19,7 +19,7 @@ function App() {
 
         try {
             // Make HTTP request to server
-            const response = await axios.post("http://localhost:3000/auth/login", body, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, body, {
                 headers: {
                     "Content-Type": "application/json",
                 },

@@ -18,7 +18,7 @@ export default function Phonebook() {
         // Fetches phonebook records
         async function fetchRecords() {
             try {
-                const response = await axios.get("http://localhost:3000/api/phonebook", {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/phonebook`, {
                     withCredentials: true
                 });
                 return response.data;
@@ -41,7 +41,7 @@ export default function Phonebook() {
 
         try {
             // Make HTTP request to server
-            const response = await axios.post("http://localhost:3000/api/phonebook", body, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/phonebook`, body, {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -68,7 +68,7 @@ export default function Phonebook() {
         try {
             // Updates record on server
             const response = await axios.put(
-                "http://localhost:3000/api/phonebook",
+                `${import.meta.env.VITE_API_URL}/api/phonebook`,
                 body,
                 {
                     headers: {
@@ -95,7 +95,7 @@ export default function Phonebook() {
     async function deleteRecord(recordToDelete)  {
         try {
             const response = await axios.delete(
-                `http://localhost:3000/api/phonebook/${recordToDelete.studentID}`,
+                `${import.meta.env.VITE_API_URL}/api/phonebook/${recordToDelete.studentID}`,
                 { withCredentials: true }
             );
             setRecords(records.filter(record => record.studentID !== recordToDelete.studentID));
