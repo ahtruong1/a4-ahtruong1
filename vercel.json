@@ -1,4 +1,11 @@
 {
+  "version": 2,
+  "builds" : [
+    {
+      "src": "app/backend/api",
+      "use": "@vercel/node"
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
