@@ -4,12 +4,27 @@
     {
       "src": "app/backend/api/index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "app/frontend/**/*",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/auth/(.*)",
       "dest": "/app/backend/api"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/app/backend/api"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/app/frontend"
     }
   ]
 }
