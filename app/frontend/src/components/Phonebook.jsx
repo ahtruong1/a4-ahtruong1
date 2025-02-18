@@ -15,14 +15,16 @@ export default function Phonebook() {
     const [editableRecord, setEditableRecord] = useState({});
 
     useEffect(() => {
-        // Fetches phonebook records
         async function fetchRecords() {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/phonebook`, {
-                    withCredentials: true
+                const response = await axios.get(
+                    `${import.meta.env.VITE_API_URL}/api/phonebook`,
+                    {
+                        withCredentials: true
                 });
                 return response.data;
             } catch (e) {
+                console.error(e)
                 alert("Failed to load phonebook. Refresh the page to try again!");
             }
         }
@@ -40,23 +42,25 @@ export default function Phonebook() {
         const body = Object.fromEntries(formData.entries());
 
         try {
-            // Make HTTP request to server
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/phonebook`, body, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                withCredentials: true
-            });
+            // Make POST request to server
+            const response = await axios.post(
+                `${import.meta.env.VITE_API_URL}/api/phonebook`,
+                body,
+                {
+                    headers: { "Content-Type": "application/json" },
+                    withCredentials: true
+                }
+            );
             setRecords([...records, response.data]);
             setShowForm(false);
         } catch (e) {
+            console.error(e);
             alert("Failed to add record. Please try again!");
         }
     }
 
     // Updates a record from the phonebook
     async function updateRecord(e) {
-        console.log("updating...");
         e.preventDefault();
 
         // Retrieve form data
@@ -66,14 +70,12 @@ export default function Phonebook() {
         const body = Object.fromEntries(formData.entries());
 
         try {
-            // Updates record on server
+            // Make PUT request to server
             const response = await axios.put(
                 `${import.meta.env.VITE_API_URL}/api/phonebook`,
                 body,
                 {
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                    headers: { "Content-Type": "application/json" },
                     withCredentials: true
                 }
             );
@@ -86,7 +88,7 @@ export default function Phonebook() {
             }));
             setEditableRecord("");
         } catch (e) {
-            console.log(e);
+            console.error(e);
             alert("Failed to update record. Please try again!");
         }
     }
@@ -98,19 +100,21 @@ export default function Phonebook() {
                 `${import.meta.env.VITE_API_URL}/api/phonebook/${recordToDelete.studentID}`,
                 { withCredentials: true }
             );
-            setRecords(records.filter(record => record.studentID !== recordToDelete.studentID));
+            if (response.status === 200) {
+                setRecords(records.filter(record => record.studentID !== recordToDelete.studentID));
+            }
         } catch (e) {
+            console.error(e);
             alert("Failed to delete record. Please try again!");
         }
     }
-
 
     return (
         <>
             {showForm && <form id="add-record-form" onSubmit={addRecord}/>}
             {editableRecord.studentID && <form id="edit-record-form" onSubmit={updateRecord}/>}
             <table className="table-fixed border border-solid border-separate border-[#A8A8A8] rounded-sm shadow-lg w-full text-left">
-                <thead className="bg-[#e6e6e6]">
+                <thead className="bg-secondary">
                 <tr>
                     <th className="p-2 w-[14%]">ID</th>
                     <th className="p-2 w-[14%]">Full Name</th>
@@ -122,15 +126,14 @@ export default function Phonebook() {
                 </thead>
                 <tbody>
                 {records.map((record) => {
-                    console.log(record.studentID === editableRecord.studentID);
                     if (record.studentID === editableRecord.studentID) {
                         return (
                             <tr className="border" key={record.studentID}>
-                                <td className="p-1 text-nowrap"><TableInput type="text" name="studentID" form="edit-record-form" defaultValue={record.studentID}/></td>
-                                <td className="p-1 text-pretty"><TableInput type="text" name="fullName" form="edit-record-form" defaultValue={record.fullName}/></td>
-                                <td className="p-1 text-pretty"><TableInput type="text" name="phoneNumber" form="edit-record-form" defaultValue={record.phoneNumber}/></td>
-                                <td className="p-1 text-pretty"><TableSelect form="edit-record-form"/></td>
-                                <td className="p-1 text-pretty"><TableInput type="text" placeholder="We'll update this one c:" name="description" disabled={true}/></td>
+                                <td className="py-2 text-nowrap"><TableInput type="text" name="studentID" form="edit-record-form" defaultValue={record.studentID}/></td>
+                                <td className="py-2 text-pretty"><TableInput type="text" name="fullName" form="edit-record-form" defaultValue={record.fullName}/></td>
+                                <td className="py-2 text-pretty"><TableInput type="text" name="phoneNumber" form="edit-record-form" defaultValue={record.phoneNumber}/></td>
+                                <td className="py-2 text-pretty"><TableSelect form="edit-record-form"/></td>
+                                <td className="py-2 text-pretty"><TableInput type="text" placeholder="We'll update this one c:" name="description" disabled={true}/></td>
                                 <td className="text-center">
                                     <div className="inline mx-1">
                                         <button className="size-fit cursor-pointer" type="submit" form="edit-record-form">
